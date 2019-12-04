@@ -1,0 +1,37 @@
+sudo apt-get update
+sudo apt install apache2
+apache2 -version
+sudo ufw app list
+sudo ufw allow 'Apache'
+sudo systemctl status apache2
+hostname -I
+tree
+sudo mkdir -p /var/www/theatulverma.com/html
+# Then assign the ownership of the directory through the following commands:
+sudo chown -R $USER:$USER /var/www/theatulverma.com/html
+sudo chmod -R 755 /var/www/theatulverma.com
+#Apache needs a virtual host file to serve the contents of your server. The default configuration file for this purpose is already created but we will make a new one for our custom configurations.
+$ sudo vim /etc/apache2/sites-available/theatulverma.com.conf
+Enter the following customized configuration details for our domain name:
+
+<VirtualHost *:80>
+ServerAdmin admin@theatulverma.com
+ServerName theatulverma.com
+ServerAlias www.theatulverma.com
+DocumentRoot /var/www/theatulverma.com/html
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+sudo a2ensite theatulverma.com.conf
+sudo a2dissite 000-default.conf
+sudo systemctl restart apache2
+sudo apache2ctl configtest
+$ echo "ServerName theatulverma.com | sudo tee /etc/apache2/conf-available/servername.conf
+$ sudo a2enconf servername
+sudo systemctl start apache2
+sudo systemctl stop apache2
+sudo systemctl restart apache2
+sudo systemctl reload apache2
+sudo systemctl enable apache2
+sudo systemctl disable apache2
+Reference : https://vitux.com/how-to-install-and-configure-apache-web-server-on-ubuntu/
