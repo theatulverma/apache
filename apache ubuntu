@@ -24,14 +24,11 @@ CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 sudo a2ensite theatulverma.com.conf
 sudo a2dissite 000-default.conf
-sudo systemctl restart apache2
+
 sudo apache2ctl configtest
 $ echo "ServerName theatulverma.com | sudo tee /etc/apache2/conf-available/servername.conf
 $ sudo a2enconf servername
 sudo systemctl start apache2
-sudo systemctl stop apache2
 sudo systemctl restart apache2
-sudo systemctl reload apache2
-sudo systemctl enable apache2
-sudo systemctl disable apache2
+
 Reference : https://vitux.com/how-to-install-and-configure-apache-web-server-on-ubuntu/
