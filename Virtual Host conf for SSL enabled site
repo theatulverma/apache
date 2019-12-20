@@ -1,0 +1,46 @@
+theatulverma.com.conf
+
+# domain: example.com
+# public: /var/www/example.com/public_html/
+# logs: /var/www/example.com/logs/
+
+<VirtualHost *:443>
+
+  # Admin email, Server Name (domain name), and any aliases
+  ServerAdmin webmaster@example.com
+  ServerName example.com
+  #ServerAlias example.com
+
+  SSLEngine on
+  SSLCertificateFile /etc/apache2/cert/example.com.crt
+  SSLCertificateKeyFile /etc/apache2/cert/example.com.key
+  SSLCertificateChainFile /etc/apache2/cert/intermediate.crt
+  <IfVersion >= 2.4.8 >
+    SSLCACertificateFile /etc/apache2/cert/intermediate.crt
+  </IfVersion>
+
+  # Index file and Document Root (where the public files are located)
+  DirectoryIndex index.php index.html
+  DocumentRoot /var/www/example.com/public_html
+
+  # Allow .htaccess and Rewrites
+  <Directory /var/www/example.com/public_html>
+    Options FollowSymLinks
+    AllowOverride All
+  </Directory>
+
+  # Log file locations
+  LogLevel warn
+  ErrorLog /var/www/example.com/logs/error.log
+  CustomLog /var/www/example.com/logs/access.log combined
+
+  # Custom php.ini path
+  # PHPINIDir /var/www/example.com/public_html/
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName example.com
+
+  # Redirect all HTTP to HTTPS
+  Redirect permanent / https://example.com/
+</VirtualHost>
