@@ -1,3 +1,8 @@
 Commands used:
 Check Apache Memory usage
 ps -ylC apache2 --sort:rss | awk '{sum+=$8; ++n} END {print "Tot="sum"("n")";print "Avg="sum"/"n"="sum/n/1024"MB"}'
+
+
+https://www.youtube.com/watch?v=uGugeHVEeiU
+
+https://www.youtube.com/watch?v=4naqwR6gWJw&t=480s
